@@ -16,7 +16,7 @@ namespace UmlClassDiagramCreator
         public string ToString()
         {
             var parameterString = String.Join(", ", Parameters);
-            return $"&gt;+ {Name}({parameterString}): {Return}&lt;br/";
+            return $"&gt;+ {DiagramCreator.escape(Name)}({DiagramCreator.escape(parameterString)}): {DiagramCreator.escape(Return)}&lt;br/";
         }
     }
 }

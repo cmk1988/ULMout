@@ -13,7 +13,7 @@ namespace UmlClassDiagramCreator
 
         public string ToString()
         {
-            return $"&gt;- {Name}: {Type}&lt;br/";
+            return $"&gt;- {DiagramCreator.escape(Name)}: {DiagramCreator.escape(Type)}&lt;br/";
         }
     }
 }

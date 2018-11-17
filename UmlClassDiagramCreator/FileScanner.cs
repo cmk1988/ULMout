@@ -39,6 +39,7 @@ namespace UmlClassDiagramCreator
         public static void ScanFileForClasses(Project project, string fileName)
         {
             var str = File.ReadAllText(fileName);
+            str = Regex.Replace(str, @"(?s)/\*.*?\*/", ""); 
             var classLines = str.Split(new string[] { " class " }, StringSplitOptions.None).Skip(1).ToList();
             var match = Regex.Match(str, "(?<= class )(.*)(?= )");
             var cla = new Classes { Name = match.Value };
@@ -48,6 +49,10 @@ namespace UmlClassDiagramCreator
             while (true)
             {
                 var idx = classMethsRemoved.IndexOf("public ");
+                if (idx < 0)
+                    idx = classMethsRemoved.IndexOf("private ");
+                if (idx < 0)
+                    idx = classMethsRemoved.IndexOf("protected ");
                 if (idx < 0)
                     break;
                 classMethsRemoved = classMethsRemoved.Replace(helper(classMethsRemoved.Substring(idx), true), "");
@@ -75,11 +80,15 @@ namespace UmlClassDiagramCreator
                 para = para[1].Replace("(","").Split(',');
                 foreach (var pr in para)
                     if(pr != "")
-                        p.Add(pr.Split(' ')[0].Trim());
+                    {
+                        var pp = pr.Split(' ')[0].Trim();
+                        if(pp != "")
+                            p.Add(pp);
+                    }
                 cla.Methods.Add(new Methods {
                     Public=true,
-                    Name = vals[1],
-                    Return = vals[0],
+                    Name = vals.Length == 1 ? vals[0] : vals[1],
+                    Return = vals.Length == 1 ? "" : vals[1],
                     Parameters = p
                 });
             }
