@@ -14,6 +14,8 @@ namespace UmlClassDiagramCreator
             str = str.Replace("<", "&lt;");
             str = str.Replace(">", "&gt;");
             str = str.Replace("&", "&amp;");
+            str = str.Replace("'", "&apos;");
+            str = str.Replace("\"", "&quot;");
             return str;
         }
 
