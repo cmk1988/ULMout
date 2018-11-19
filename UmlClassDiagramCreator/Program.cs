@@ -21,7 +21,7 @@ namespace UmlClassDiagramCreator
         {
             var pro = new Project();
             pro.Classes = new List<Classes>();
-            var files = getFiles(new DirectoryInfo(@"E:\Git\room-observer\RoomObserverServer\src\room\observer\"));
+            var files = getFiles(new DirectoryInfo(args[0]));
 
             foreach (var file in files)
             {

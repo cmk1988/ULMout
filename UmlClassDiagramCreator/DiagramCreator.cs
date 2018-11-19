@@ -21,7 +21,7 @@ namespace UmlClassDiagramCreator
 
         public static string GetDiagram(Project pro)
         {
-            var input = File.ReadAllText(@"C:\Users\chris\Documents\UML\interface.tpt");
+            var input = File.ReadAllText(@"templates\interface.tpt");
             int x = 10;
             int y = 10;
             var result = "";
@@ -55,7 +55,7 @@ namespace UmlClassDiagramCreator
                 result += output;
                 y += cls.Y + 50;
             }
-            result = File.ReadAllText(@"C:\Users\chris\Documents\UML\diagram.tpt").Replace("##content##", result);
+            result = File.ReadAllText(@"templates\diagram.tpt").Replace("##content##", result);
             return result;
         }
     }
